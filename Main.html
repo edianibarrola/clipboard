@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>My App</title>
+    <title>Edian's Clipboard</title>
     <style>
         body {
           display: flex;
@@ -11,8 +11,12 @@
           height: 100vh;
           margin: 0;
           background-color: #f2f2f2;
+          color: #888888;
         }
-      
+       
+        input, button {
+             color: #888888;
+        }     
         #inputFields {
           display: flex;
           flex-direction: column;
@@ -33,6 +37,7 @@
       
         .input-row input {
           margin-right: 10px;
+          margin-left: 10px;
           background-color: #f2f2f2;
           border: none;
           border-radius: 10px;
@@ -74,37 +79,66 @@
           box-shadow: none;
           transform: translate(2px, 2px);
         }
+        
       </style>
       
   </head>
   <body>
     <div id="inputFields">
       <div class="input-row">
-        <input type="text" class="myInput" value="Hello, world!">
-        <button class="copy-button" onclick="copyToClipboard(this)">Copy to Clipboard</button>
+        <button class="remove-button">-</button>
+        <input type="text" placeholder="Enter text">
+        <button class="copy-button">Copy</button>
       </div>
     </div>
-
-    <button onclick="addRow()">Add Row</button>
-
+    <button id="addButton">Add row</button>
     <script>
-      function copyToClipboard(button) {
-        var inputField = button.parentNode.querySelector('.myInput');
-        inputField.select();
-        document.execCommand("copy");
-        alert("Copied the text: " + inputField.value);
-      }
+      // Add event listener to the copy button for each input row
+      const copyButtons = document.querySelectorAll('.copy-button');
+      copyButtons.forEach(button => {
+        button.addEventListener('click', () => {
+          const input = button.previousElementSibling;
+          input.select();
+          document.execCommand("copy");
+        });
+      });
 
-      function addRow() {
-        var inputFields = document.getElementById("inputFields");
-        var newRow = document.createElement("div");
-        newRow.classList.add("input-row");
+      // Add event listener to the add button to create a new input row
+      const addButton = document.getElementById('addButton');
+      addButton.addEventListener('click', () => {
+        const inputFields = document.getElementById('inputFields');
+        const newRow = document.createElement('div');
+        newRow.classList.add('input-row');
         newRow.innerHTML = `
-          <input type="text" class="myInput" value="">
-          <button class="copy-button" onclick="copyToClipboard(this)">Copy to Clipboard</button>
+          <button class="remove-button">-</button>
+          <input type="text" placeholder="Enter text">
+          <button class="copy-button">Copy</button>
         `;
         inputFields.appendChild(newRow);
-      }
+
+        // Add event listener to the copy button for the new input row
+        const newCopyButton = newRow.querySelector('.copy-button');
+        newCopyButton.addEventListener('click', () => {
+          const input = newCopyButton.previousElementSibling;
+          input.select();
+          document.execCommand("copy");
+        });
+
+        // Add event listener to the remove button for the new input row
+        const newRemoveButton = newRow.querySelector('.remove-button');
+        newRemoveButton.addEventListener('click', () => {
+          newRow.remove();
+        });
+      });
+
+      // Add event listener to the remove button for each input row
+      const removeButtons = document.querySelectorAll('.remove-button');
+      removeButtons.forEach(button => {
+        button.addEventListener('click', () => {
+          const row = button.parentNode;
+          row.remove();
+        });
+      });
     </script>
   </body>
 </html>
