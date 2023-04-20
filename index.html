@@ -87,7 +87,29 @@
     padding: 8px;
   }
 }
-        
+.footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 50px;
+  background-color: #f2f2f2;
+  color: #888888;
+  font-size: 14px;
+}
+
+.footer a {
+  color: #888888;
+  text-decoration: none;
+  margin-left: 5px;
+  font-weight: bold;
+}
+
+.footer a:hover {
+  text-decoration: underline;
+}
       </style>
       
   </head>
@@ -147,6 +169,16 @@
           row.remove();
         });
       });
+      // Popup instructions on the first load of the page
+      window.onload = function() {
+  alert("Are you tired of typing the same couple of things over and over like a 19th-century telegraph operator? \n\n Say no more! Here are some 'rules' to get you started:\n\n1. Type your text in the field\n    This is where you type in the text that you want to copy.\n2. Click the 'Copy' button to copy the text\n    You're like a highly trained ninja, stealthily copying text without anyone noticing.\n3. Congratulations! You can now paste whatever you copied\n    Anywhere on any program or website. You're basically a digital magician, making words appear out of thin air.\n4. Click the '+' button to add more fields\n    It's like you're building a digital empire, one text field at a time.\n5. Click the '-' button to delete a field\n    Don't be afraid to Marie Kondo your text fields and toss them out.\n6. Keep clicking the '+' button to add even more text fields\n    You're like a text field addict, and we're here for it.\n7. Congrats on all the time you're saving by not having to type things over and over!\n    Now that you're basically a copy-pasting wizard, you can use all that extra time to do something fun. Learn a new skill, binge-watch your favorite TV show, or just take a well-deserved break. The possibilities are endless!");
+}
+
+
     </script>
   </body>
+  <footer class="footer">
+    Built by Edian Ibarrola.
+    <a href="mailto:edianibarrola@gmail.com">Contact me</a>
+  </footer>
 </html>
